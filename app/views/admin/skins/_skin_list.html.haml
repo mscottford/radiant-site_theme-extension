@@ -1,0 +1,34 @@
+%div{:id => "content_wrapper", :style => "background-color: #ffffff" }
+  %div{:class => "split_content"}
+    %h1 Choose A Template
+    %p
+      Activating a new Skin will totally <strong style="color:red;">remove</strong> all Pages, Assets, Snippets, and Layouts in your system. Make sure you settle on a template before making any permanent changes.
+    %div
+      - unless @skins.empty?
+        - @skins.each do |skin|
+          .skin
+            %h2
+              = link_to skin.name, "##{skin.id}_box", :id => "#{skin.id}_small", :title => "Click to preview #{skin.name}."
+            .skin_icon
+              = link_to image_tag(skin.image.url(:small), :border=>0), "##{skin.id}_box", :id => "#{skin.id}_header"
+            .skin_details{:style => "width: 200px;"}
+              .skin_type
+                Price:
+                = skin.price
+              .skin_actions
+                = link_to('Activate', :controller => :skins, :action => :activate, :id => skin.id)
+                - if skin.created_by == current_user || current_user.admin?
+                  |
+                  = link_to('Delete', admin_skin_path(skin), :confirm => "Are you sure you want to delete #{skin.name}?", :method => 'delete', :class => 'skin_action')
+              %p.skin_description
+                = skin.description
+          %div{:id => "#{skin.id}_box"}
+            = image_tag(skin.image.url(:large))
+          :javascript
+            Event.observe(window, 'load', function() { new FancyZoom("#{skin.id}_small"); new FancyZoom("#{skin.id}_header"); });
+        .spacer
+          &nbsp;
+        .paginate
+          = will_paginate @skins unless @skins.empty?
+      - else
+        %strong The system found no skins.

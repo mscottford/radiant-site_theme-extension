@@ -1,0 +1,95 @@
+= Description
+
+A theming engine for Radiant. This extension assumes your using vhost extension. Although I'm sure people using multi_site won't have a problem. When you "activate" or "de-activate" a new skin. The extension looks for a "site" to act./deact. on. So if your user model doesn't have a "site_id" column this extension won't work. No worries though! You should be able to easily edit the Skin model to get this to work with a regular Radiant. I'm sure someone will fork this and make that happen very soon and when they do I will update this README with a link.
+
+I've included an example theme with this extension. You can find it under the "themes" folder. That is the only reason that folder exist it serves no other function. You should put it in your .gitignore when you deploy your code.
+
+= Installation
+sudo gem install rubyzip
+sudo gem install hpricot
+
+git clone git://github.com/kbingman/paperclipped.git vendor/extensions/paperclipped
+git clone git://github.com:sbmsuite/radiant-site_theme-extension.git vendor/extensions/site_theme
+
+= Theme Structure
+A "theme" is a .zip file that contains the structure of your radiant site. The theme zip contains the following components.
+
+== layout.html - A normal Radiant layout
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title><r:title /></title>
+  <r:meta>
+    <r:description />
+    <r:keywords />
+  </r:meta>
+		<link href="/citrusisland.css" rel="stylesheet" type="text/css" media="screen" />
+		<link href="/style.css" rel="stylesheet" type="text/css" media="screen" />
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
+				<r:snippet name='header' />
+			</div>
+			<div id="menu">
+				<r:snippet name='menu' />
+			</div>
+			<div id="sidebar">
+				<r:snippet name='sidebar' />
+			</div>
+			<div id="main">
+				<r:content part='body' inherit='true' />
+			</div>
+			<div id="rightbar">
+				<r:snippet name='rightbar' />
+			</div>
+			<div id="footer">
+				<r:snippet name='footer' />
+			</div>
+		</div>
+	</body>
+</html>
+== themename.yml - Theme meta data used by application.
+name: CitrusIsland
+description: A simple design with citrus flavor
+type: free
+price: free
+
+== themename.png - A screenshot of your theme.
+
+== styles - A folder containing your style sheets.
+themename.css
+
+The extension expects there to be at least one stylesheet in the folder called themename.css. Where "themename" is the name of your theme for example "mycustomtheme.css"
+
+== snippets - A folder containing snippet files
+these are just plain text files with no extension that contain HTML snippets. These files can contain radiant tags just like any normal snippet. Or they can be totally made from radiant tags.
+
+== parts - A folder containing the page parts you need. a body part is required
+body (required)
+sidebar (optional)
+
+== pages - A folder containing default pages for your site.
+Home
+
+We recommend including at least a "Home" page.
+
+== images - A folder containing your theme's images.
+
+header.png
+chicken.png
+
+etc, etc. 
+
+
+= Requirements
+
+== gems
+ - rubyzip
+ - hpricot
+
+== extensions
+ - vhost
+ - paperclipped
+
+

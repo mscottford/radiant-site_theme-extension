@@ -1,0 +1,78 @@
+div.skin {
+	width: 320px;
+	margin-right: 25px;
+  float: left;
+}
+
+div.skin h2 {
+  color: #0066cc;
+  font-size: 12pt;
+  padding-bottom: 3px;
+}
+
+div.skin_icon {
+	border: 1px solid #cccccc;
+	padding: 3px;
+	color: #333333;
+	width: 300px;
+}
+.skin_description {
+  text-align: left;
+}
+div.skin_list {
+  background-color:#F5F5F5;
+  border-top-color:#DDDDDD;
+  border-top-style:solid;
+  border-top-width:3px;
+  margin-bottom:15px;
+  margin-left:15px;
+  margin-right:15px;
+  margin-top:5px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+}
+
+div.upload_skin {
+  background-color:#F5F5F5;
+  border-top-color:#DDDDDD;
+  border-top-style:solid;
+  border-top-width:3px;
+  margin-bottom:15px;
+  margin-left:15px;
+  margin-right:15px;
+  margin-top:5px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom: 5px;
+}
+
+div.skin_preview h3 {
+  margin-top: 0px;
+  margin-left: 15px;
+}
+
+div.skin_actions {
+  text-align: right;
+  padding-right: 15px;
+}
+
+.paginate {
+
+}
+
+div.spacer {
+  clear: both;
+}
+
+.skin_list_title {
+  color: #222222;
+  margin-bottom: 0em;
+}
+
+.section_title {
+  color: #222222;
+  margin-bottom: 0em;
+  margin-left: 15px;
+}
+

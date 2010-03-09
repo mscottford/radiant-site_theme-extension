@@ -1,0 +1,5 @@
+- @page_title = 'Look & Feel - ' + default_page_title
+
+= render :partial => 'list'
+
+- include_stylesheet 'site_skins/site_skins'

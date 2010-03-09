@@ -1,0 +1,12 @@
+- @page_title = 'Look & Feel - ' + default_page_title
+- include_stylesheet 'site_skins/site_skins'
+- include_javascript 'admin/scriptaculous'
+- include_javascript 'fancyzoom'
+
+- body_classes << "split"
+
+- render_region :main do |main|
+  - main.render_region :skin_list
+
+- render_region :sidebar do |sidebar|
+  - sidebar.render_region :sidebar_boxes

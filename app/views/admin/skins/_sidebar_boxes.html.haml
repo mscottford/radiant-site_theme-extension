@@ -1,0 +1,20 @@
+%div{:id => "sidebar_wrapper"}
+  %div{:id => "", :class => "sidebar"}
+    .box
+      %h3 Search Available Templates
+      - form_for :skin, :html => { :onsubmit_status=>"Searching&#8230;", :method => 'post' }, :url => "/admin/skins/search", :method => 'get' do |form|
+        = form.text_field :query, :size => "25"
+        = submit_tag "Search"
+    .box
+      = render :partial => '/admin/skins/add_skin_form'
+    .box
+      %h3{} Current Template
+      %p{:style => "font-size: 10pt;"}
+        = current_site.skin.name if current_site.skin != nil
+      .current_skin{:style => "clear: both; "}
+        - if current_site.skin != nil
+          .skin_icon_medium= image_tag current_site.skin.image.url(:medium)
+          %p{:style => "font-size: 10pt;"}
+            = link_to "Deactivate", "skins/deactivate/#{current_site.skin.id}", :confirm => "Are you sure you wish to de-activate your current skin? All data will be lost."
+        - else
+          .skin_icon{:style => "font-weight: bold; padding: 15px; text-align: center; background-color: #FFFFCC;"}= "There is no active Skin."
