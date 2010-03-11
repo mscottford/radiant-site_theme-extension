@@ -1,7 +1,18 @@
-require 'zip/zip'
-require 'zip/zipfilesystem'
+begin
+  require 'zip/zip'
+  require 'zip/zipfilesystem'
+rescue MissingSourceFile
+  raise "Please install the rubyzip gem"
+end
+  
+begin
+  require 'hpricot'
+rescue MissingSourceFile
+  raise "Please install the hpricot gem"
+end
+
 require 'fileutils'
-require 'hpricot'
+
 
 class Skin < ActiveRecord::Base
 	has_attached_file :image, :styles => { :thumb => "100x100", :small => "200x200", :medium => "300x300", :large => "500x500" }
