@@ -1,6 +1,0 @@
-- form_for :skin, :html => { :multipart => true } :url => admin_skins_path do |form|
-  %p
-    %label= "Add Skin"
-    = form.file_field :archive
-  %p
-    = submit_tag "Upload Skin"
