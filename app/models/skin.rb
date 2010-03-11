@@ -25,7 +25,6 @@ class Skin < ActiveRecord::Base
   validates_uniqueness_of :name
 
 	def unzip_and_process_skin
-		#archive_name = self.archive_file_name.delete('.zip')
 		archive_name = self.archive_file_name.chomp(File.extname(self.archive_file_name))		
 		archive = Zip::ZipFile.open(self.archive.path, Zip::ZipFile::CREATE)
 
@@ -161,7 +160,7 @@ class Skin < ActiveRecord::Base
 			asset.title = image.chomp(File.extname(image))
 			asset.created_by_id = user.id
 			asset.site_id = site.id
-       asset.skin_image = true
+      asset.skin_image = true
 			asset.save!
 		}
 
@@ -305,9 +304,6 @@ class Skin < ActiveRecord::Base
   # Deactive Skin on current site.  
   #----------------------------------------------------------------------------
 	def deactivate_on(site)
-		#Layout.delete_all(["site_id = ? AND name = ?", site.id, "#{self.name.downcase}"])
-		#Layout.delete_all(["site_id = ? AND name = ?", site.id, "stylesheet"])
-
 		pages = Page.find(:all, :conditions => ["site_id = ?", site.id])
 		pages.each { |page|
       page.parts.each { |part|
@@ -316,19 +312,8 @@ class Skin < ActiveRecord::Base
   		Page.delete(page.id)
 		}
 
-    #snippets = Snippet.find(:all, :conditions => ["site_id = ? AND skin_snippet = ?", site.id, true])
-    #snippets.each { |snippet|
-    #  Snippet.destroy(snippet.id)
-    #}
-
-    #assets = Asset.find(:all, :conditions => ["site_id = ? AND skin_image = ?", site.id, true])
-    #assets.each { |asset|
-    #  Asset.destroy(asset.id)
-    #}
-
 		Layout.delete_all(["site_id = ?", site.id])
     Asset.delete_all(["site_id = ? AND skin_image = ?", site.id, true])
-    #Page.destroy_all(["site_id = ?", site.id])
     Snippet.delete_all(["site_id = ?", site.id])
 
     # Site no longer has this skin.
